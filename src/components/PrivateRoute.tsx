@@ -1,10 +1,13 @@
 import React from "react"
-import { Route, RouteProps } from "react-router-dom"
-import { Login } from "../pages/Account"
+import { RouteProps, Outlet, Navigate } from "react-router-dom"
+import { AccountState } from "../store/account/types"
+import { useSelector } from "react-redux"
+import { AppState } from "../store"
 
 export const PrivateRoute = ({
   children,
   ...rest
 }: RouteProps): JSX.Element => {
-  return <Route {...rest} path="/" element={true ? children : <Login />} />
+  const account: AccountState = useSelector((state: AppState) => state.account)
+  return account.token ? <Outlet /> : <Navigate to="/login" />
 }
