@@ -18,6 +18,8 @@ const accountReducer = (
 ): AccountState => {
   switch (action.type) {
     case LOGIN_REQUEST: {
+      console.log("Loading")
+
       return { ...state, loading: true }
     }
 
